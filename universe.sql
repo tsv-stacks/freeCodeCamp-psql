@@ -69,7 +69,7 @@ ALTER TABLE public.moon OWNER TO freecodecamp;
 
 CREATE TABLE public.planet (
     name character varying(20) NOT NULL,
-    mass numeric(5,3) NOT NULL,
+    mass numeric(10,2) NOT NULL,
     diameter integer NOT NULL,
     density integer NOT NULL,
     gravity numeric(5,1) NOT NULL,
@@ -109,6 +109,14 @@ ALTER TABLE public.star OWNER TO freecodecamp;
 -- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.planet VALUES ('Mercury', 0.33, 4879, 5427, 3.7, false, 0, 57.9, 'The Sun', NULL);
+INSERT INTO public.planet VALUES ('Venus', 4.87, 12104, 5243, 8.9, false, 0, 108.2, 'The Sun', NULL);
+INSERT INTO public.planet VALUES ('Earth', 5.97, 12756, 5514, 9.8, true, 1, 149.6, 'The Sun', NULL);
+INSERT INTO public.planet VALUES ('Mars', 0.64, 6792, 3933, 3.7, false, 2, 227.9, 'The Sun', NULL);
+INSERT INTO public.planet VALUES ('Jupiter', 1898.00, 142984, 1326, 23.1, false, 67, 778.6, 'The Sun', NULL);
+INSERT INTO public.planet VALUES ('Saturn', 568.00, 120536, 687, 9.0, false, 62, 1433.5, 'The Sun', NULL);
+INSERT INTO public.planet VALUES ('Uranus', 86.80, 51118, 1271, 8.7, false, 27, 2872.5, 'The Sun', NULL);
+INSERT INTO public.planet VALUES ('Neptune', 102.00, 49528, 1638, 11.0, false, 14, 4495.1, 'The Sun', NULL);
 
 
 --
