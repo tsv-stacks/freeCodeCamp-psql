@@ -68,6 +68,16 @@ ALTER TABLE public.moon OWNER TO freecodecamp;
 --
 
 CREATE TABLE public.planet (
+    name character varying(20) NOT NULL,
+    mass numeric(5,3) NOT NULL,
+    diameter integer NOT NULL,
+    density integer NOT NULL,
+    gravity numeric(5,1) NOT NULL,
+    has_life boolean NOT NULL,
+    no_of_moons integer,
+    distance_from_sun numeric(6,1) NOT NULL,
+    star_name character varying(255) NOT NULL,
+    notes text
 );
 
 
@@ -105,6 +115,14 @@ ALTER TABLE public.star OWNER TO freecodecamp;
 -- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+
+
+--
+-- Name: planet planet_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT planet_name_key UNIQUE (name);
 
 
 --
