@@ -48,6 +48,9 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.galaxy (
+    name character varying(20) NOT NULL,
+    type character varying(20) NOT NULL,
+    distance_from_earth numeric(5,1)
 );
 
 
@@ -58,6 +61,7 @@ ALTER TABLE public.galaxy OWNER TO freecodecamp;
 --
 
 CREATE TABLE public.moon (
+    name character varying(20) NOT NULL
 );
 
 
@@ -88,6 +92,7 @@ ALTER TABLE public.planet OWNER TO freecodecamp;
 --
 
 CREATE TABLE public.star (
+    name character varying(20) NOT NULL
 );
 
 
@@ -97,6 +102,12 @@ ALTER TABLE public.star OWNER TO freecodecamp;
 -- Data for Name: galaxy; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.galaxy VALUES ('Milky Way', 'Spiral', 0.0);
+INSERT INTO public.galaxy VALUES ('Andromeda', 'Spiral', 2.5);
+INSERT INTO public.galaxy VALUES ('Whirlpool (M51)', 'Spiral', 30.0);
+INSERT INTO public.galaxy VALUES ('Cigar (M82)', 'Irregular', 12.0);
+INSERT INTO public.galaxy VALUES ('Triangulum (M33)', 'Unbarred', 3.0);
+INSERT INTO public.galaxy VALUES ('Messier 87', 'Elliptical', 55.0);
 
 
 --
