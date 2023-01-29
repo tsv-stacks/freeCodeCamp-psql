@@ -50,7 +50,8 @@ SET default_table_access_method = heap;
 CREATE TABLE public.galaxy (
     name character varying(20) NOT NULL,
     type character varying(20) NOT NULL,
-    distance_from_earth numeric(5,1)
+    distance_from_earth numeric(5,1),
+    galaxy_id integer NOT NULL
 );
 
 
@@ -81,7 +82,8 @@ CREATE TABLE public.planet (
     no_of_moons integer,
     distance_from_sun numeric(6,1) NOT NULL,
     star_name character varying(255) NOT NULL,
-    notes text
+    notes text,
+    galaxy_id integer
 );
 
 
@@ -102,12 +104,12 @@ ALTER TABLE public.star OWNER TO freecodecamp;
 -- Data for Name: galaxy; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.galaxy VALUES ('Milky Way', 'Spiral', 0.0);
-INSERT INTO public.galaxy VALUES ('Andromeda', 'Spiral', 2.5);
-INSERT INTO public.galaxy VALUES ('Whirlpool (M51)', 'Spiral', 30.0);
-INSERT INTO public.galaxy VALUES ('Cigar (M82)', 'Irregular', 12.0);
-INSERT INTO public.galaxy VALUES ('Triangulum (M33)', 'Unbarred', 3.0);
-INSERT INTO public.galaxy VALUES ('Messier 87', 'Elliptical', 55.0);
+INSERT INTO public.galaxy VALUES ('Milky Way', 'Spiral', 0.0, 1);
+INSERT INTO public.galaxy VALUES ('Messier 87', 'Elliptical', 55.0, 2);
+INSERT INTO public.galaxy VALUES ('Cigar (M82)', 'Irregular', 12.0, 3);
+INSERT INTO public.galaxy VALUES ('Andromeda', 'Spiral', 2.5, 4);
+INSERT INTO public.galaxy VALUES ('Whirlpool (M51)', 'Spiral', 30.0, 5);
+INSERT INTO public.galaxy VALUES ('Triangulum (M33)', 'Unbarred', 3.0, 6);
 
 
 --
@@ -120,14 +122,14 @@ INSERT INTO public.galaxy VALUES ('Messier 87', 'Elliptical', 55.0);
 -- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.planet VALUES ('Mercury', 0.33, 4879, 5427, 3.7, false, 0, 57.9, 'The Sun', NULL);
-INSERT INTO public.planet VALUES ('Venus', 4.87, 12104, 5243, 8.9, false, 0, 108.2, 'The Sun', NULL);
-INSERT INTO public.planet VALUES ('Earth', 5.97, 12756, 5514, 9.8, true, 1, 149.6, 'The Sun', NULL);
-INSERT INTO public.planet VALUES ('Mars', 0.64, 6792, 3933, 3.7, false, 2, 227.9, 'The Sun', NULL);
-INSERT INTO public.planet VALUES ('Jupiter', 1898.00, 142984, 1326, 23.1, false, 67, 778.6, 'The Sun', NULL);
-INSERT INTO public.planet VALUES ('Saturn', 568.00, 120536, 687, 9.0, false, 62, 1433.5, 'The Sun', NULL);
-INSERT INTO public.planet VALUES ('Uranus', 86.80, 51118, 1271, 8.7, false, 27, 2872.5, 'The Sun', NULL);
-INSERT INTO public.planet VALUES ('Neptune', 102.00, 49528, 1638, 11.0, false, 14, 4495.1, 'The Sun', NULL);
+INSERT INTO public.planet VALUES ('Mercury', 0.33, 4879, 5427, 3.7, false, 0, 57.9, 'The Sun', NULL, 1);
+INSERT INTO public.planet VALUES ('Venus', 4.87, 12104, 5243, 8.9, false, 0, 108.2, 'The Sun', NULL, 1);
+INSERT INTO public.planet VALUES ('Earth', 5.97, 12756, 5514, 9.8, true, 1, 149.6, 'The Sun', NULL, 1);
+INSERT INTO public.planet VALUES ('Mars', 0.64, 6792, 3933, 3.7, false, 2, 227.9, 'The Sun', NULL, 1);
+INSERT INTO public.planet VALUES ('Jupiter', 1898.00, 142984, 1326, 23.1, false, 67, 778.6, 'The Sun', NULL, 1);
+INSERT INTO public.planet VALUES ('Saturn', 568.00, 120536, 687, 9.0, false, 62, 1433.5, 'The Sun', NULL, 1);
+INSERT INTO public.planet VALUES ('Uranus', 86.80, 51118, 1271, 8.7, false, 27, 2872.5, 'The Sun', NULL, 1);
+INSERT INTO public.planet VALUES ('Neptune', 102.00, 49528, 1638, 11.0, false, 14, 4495.1, 'The Sun', NULL, 1);
 
 
 --
@@ -137,11 +139,35 @@ INSERT INTO public.planet VALUES ('Neptune', 102.00, 49528, 1638, 11.0, false, 1
 
 
 --
+-- Name: galaxy galaxy_galaxy_id_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.galaxy
+    ADD CONSTRAINT galaxy_galaxy_id_key UNIQUE (galaxy_id);
+
+
+--
+-- Name: galaxy galaxy_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.galaxy
+    ADD CONSTRAINT galaxy_pkey PRIMARY KEY (galaxy_id);
+
+
+--
 -- Name: planet planet_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.planet
     ADD CONSTRAINT planet_name_key UNIQUE (name);
+
+
+--
+-- Name: planet planet_galaxy_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT planet_galaxy_id_fkey FOREIGN KEY (galaxy_id) REFERENCES public.galaxy(galaxy_id);
 
 
 --
